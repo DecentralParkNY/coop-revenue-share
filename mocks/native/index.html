@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>EQUITY // Revenue Assets</title>
+    <style>
+        :root {
+            --obsidian: #0a0a0b;
+            --emerald: #00ff88;
+            --slate: #1a1a1c;
+            --text: #e0e0e0;
+        }
+        body, html {
+            margin: 0; padding: 0; height: 100%;
+            background: var(--obsidian);
+            color: var(--text);
+            font-family: 'Courier New', monospace;
+            overflow: hidden;
+        }
+        .container {
+            display: flex; height: 100vh; width: 100vw;
+        }
+        .hero-left {
+            flex: 1; padding: 4rem; 
+            display: flex; flex-direction: column; justify-content: center;
+            border-right: 1px solid #333;
+        }
+        .hero-right {
+            flex: 1; background: var(--slate);
+            display: flex; align-items: center; justify-content: center;
+            position: relative;
+            background-image: radial-gradient(circle at 2px 2px, #333 1px, transparent 0);
+            background-size: 40px 40px;
+        }
+        .brand {
+            color: var(--emerald); font-weight: bold; font-size: 1.2rem;
+            letter-spacing: 4px; margin-bottom: 2rem;
+        }
+        h1 {
+            font-size: 3rem; line-height: 1.1; margin: 0 0 1.5rem 0;
+            max-width: 500px;
+        }
+        .pitch {
+            font-size: 1.1rem; color: #888; max-width: 400px; line-height: 1.6;
+        }
+        .vault-card {
+            background: var(--obsidian);
+            border: 1px solid var(--emerald);
+            padding: 2.5rem; border-radius: 4px;
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.1);
+            width: 350px;
+        }
+        .stat-row {
+            display: flex; justify-content: space-between; margin-bottom: 1rem;
+        }
+        .label { color: #666; font-size: 0.8rem; text-transform: uppercase; }
+        .value { color: var(--emerald); font-size: 1.4rem; font-weight: bold; }
+        .slider-container {
+            margin-top: 2rem;
+        }
+        input[type=range] {
+            width: 100%; appearance: none; background: #333; height: 4px; outline: none;
+            cursor: pointer;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            appearance: none; width: 15px; height: 15px; background: var(--emerald);
+            border-radius: 50%; box-shadow: 0 0 10px var(--emerald);
+        }
+        .btn {
+            margin-top: 2rem; width: 100%; padding: 1rem;
+            background: var(--emerald); color: var(--obsidian);
+            border: none; font-family: inherit; font-weight: bold;
+            cursor: pointer; text-transform: uppercase;
+            transition: opacity 0.2s;
+        }
+        .btn:hover { opacity: 0.8; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hero-left">
+            <div class="brand">EQUITY_</div>
+            <h1>Turn your orders into assets.</h1>
+            <p class="pitch">Sell your future revenue streams to your community. Instant liquidity for long-term growth.</p>
+        </div>
+        <div class="hero-right">
+            <div class="vault-card">
+                <div class="stat-row">
+                    <span class="label">Community Share</span>
+                    <span class="value" id="share-val">20%</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">Immediate Buyout</span>
+                    <span class="value" id="buyout-val">$12,000</span>
+                </div>
+                <div class="slider-container">
+                    <input type="range" id="rev-slider" min="5" max="80" value="20">
+                </div>
+                <button class="btn">Mint Revenue Bond</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        const slider = document.getElementById('rev-slider');
+        const shareVal = document.getElementById('share-val');
+        const buyoutVal = document.getElementById('buyout-val');
+        
+        const update = () => {
+            const val = slider.value;
+            shareVal.innerText = val + '%';
+            // Mock calculation: higher share = higher immediate buyout
+            const buyout = (val * 600).toLocaleString();
+            buyoutVal.innerText = '$' + buyout;
+        };
+        
+        slider.addEventListener('input', update);
+        update();
+    </script>
+</body>
+</html>
